@@ -1,0 +1,12 @@
+{
+  "OK": "OK",
+  "WRONG_ARGUMENTS": "wrong number of arguments for '{1}' command",
+  "WRONG_COMMAND": "unknown command",
+  "WRONG_COMMAND_SPECIFIC": "unknown command `{1}`, with args beginning with: {2}",
+  "WRONG_TYPE": "WRONGTYPE Operation against a key holding the wrong kind of value",
+  "REQUIRE_POSITIVE": "value is out of range, must be positive",
+  "REQUIRE_INTEGER": "value is not an integer or out of range",
+  "NULL": "(nil)",
+  "EMPTY_LIST": "(empty list or set)",
+  "INTEGER": "(integer) {1}"
+}

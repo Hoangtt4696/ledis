@@ -1,0 +1,36 @@
+body {
+  background-color: #263238;
+  color: white;
+}
+
+#login-time {
+  font-size: 18px;
+}
+
+.ledis-cmd {
+  padding: 20px 20px 20px 5px;
+}
+
+.terminal {
+  display: flex;
+  font-size: 18px;
+}
+
+.log-result {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.cmd-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: 0;
+  color: white;
+  flex: 1;
+  margin-left: 5px;
+}
+
+pre {
+  margin: 0;
+}

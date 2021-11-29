@@ -1,0 +1,18 @@
+{
+  "name": "ledis-server",
+  "version": "1.0.0",
+  "description": "Ledis server nodejs",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_PATH=./src nodemon -r esm src/index.js",
+    "debug": "nodemon --inspect -r esm -r module-alias/register src/index.js",
+    "prod": "NODE_ENV=production node -r esm -r module-alias/register src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.6",
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
+  }
+}
