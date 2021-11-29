@@ -108,8 +108,15 @@ class Keys extends Storage {
       throw new Error(util.getMessage(config.messages.WRONG_ARGUMENTS, 'save'));
     }
 
+    const snapshortDir = `${process.cwd()}/storage/snapshots`;
+    const isDirExisted = await fs.existsSync(snapshortDir);
+
+    if (!isDirExisted) {
+      await fs.mkdirSync(snapshortDir);
+    }
+
     const fileName = `${Date.now()}`;
-    const filePath = `${process.cwd()}/storage/snapshots/${fileName}.txt`;
+    const filePath = `${snapshortDir}/${fileName}.txt`;
 
     await fs.writeFileSync(filePath, JSON.stringify(this.storage, (key, val) => {
       if (val instanceof Set) {
@@ -128,6 +135,12 @@ class Keys extends Storage {
     }
 
     const snapshortDir = `${process.cwd()}/storage/snapshots`;
+    const isDirExisted = await fs.existsSync(snapshortDir);
+
+    if (!isDirExisted) {
+      await fs.mkdirSync(snapshortDir);
+    }
+
     const files = await fs.readdirSync(snapshortDir);
 
     if (files.length > 0) {
