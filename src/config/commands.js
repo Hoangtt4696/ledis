@@ -22,4 +22,6 @@ export default {
   flushdb: {},
   expire: {},
   ttl: {},
+  save: {},
+  restore: {},
 };

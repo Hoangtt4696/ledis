@@ -1,4 +1,5 @@
 import util from 'utils/util';
+import fs from 'fs';
 import config from '../../config';
 import Storage from './storage';
 
@@ -8,7 +9,7 @@ class Keys extends Storage {
   }
 
   get commandKeys() {
-    return ['keys', 'del', 'flushdb', 'expire', 'ttl'];
+    return ['keys', 'del', 'flushdb', 'expire', 'ttl', 'save', 'restore'];
   }
 
   // follow assignment: get all keys
@@ -22,7 +23,7 @@ class Keys extends Storage {
     return result.length === 0 ? config.messages.EMPTY_LIST : result;
   }
 
-    // follow assignment: del a key
+  // follow assignment: del a key
   del(key) {
     if (arguments.length !== 1) {
       throw new Error(util.getMessage(config.messages.WRONG_ARGUMENTS, 'del'));
@@ -100,6 +101,56 @@ class Keys extends Storage {
     const remaining = Math.round(seconds - (Date.now() - start) / 1000);
 
     return util.getMessage(config.messages.INTEGER, remaining)
+  }
+
+  async save() {
+    if (arguments.length !== 0) {
+      throw new Error(util.getMessage(config.messages.WRONG_ARGUMENTS, 'save'));
+    }
+
+    const fileName = `${Date.now()}`;
+    const filePath = `${process.cwd()}/storage/snapshots/${fileName}.txt`;
+
+    await fs.writeFileSync(filePath, JSON.stringify(this.storage, (key, val) => {
+      if (val instanceof Set) {
+        return { isSet: true, values: [...val] };
+      }
+
+      return val;
+    }));
+
+    return config.messages.OK;
+  }
+
+  async restore() {
+    if (arguments.length !== 0) {
+      throw new Error(util.getMessage(config.messages.WRONG_ARGUMENTS, 'save'));
+    }
+
+    const snapshortDir = `${process.cwd()}/storage/snapshots`;
+    const files = await fs.readdirSync(snapshortDir);
+
+    if (files.length > 0) {
+      const data = await fs.readFileSync(`${snapshortDir}/${files[files.length - 1]}`);
+
+      if (data) {
+        const dataStorage = JSON.parse(data.toString(), (key, val) => {
+          if (val && val.isSet) {
+            return new Set(val.values);
+          }
+
+          return val;
+        });
+
+        this.flushdb();
+
+        Object.keys(dataStorage).forEach(key => {
+          this.storage[key] = dataStorage[key];
+        });
+      }
+    }
+
+    return config.messages.OK;
   }
 }
 
