@@ -30,7 +30,7 @@ $(document).ready(function(){
             res = response.message;
           }
 
-					$("#log-result").append("127.0.0.1:16379 > " + $("#cmd").val() + "</br><pre>" + res + "</pre>");
+					$("#log-result").append("ledis-server > " + $("#cmd").val() + "</br><pre>" + res + "</pre>");
 
 					$("#cmd").val("");
 					$("#cmd").prop('disabled', false);
