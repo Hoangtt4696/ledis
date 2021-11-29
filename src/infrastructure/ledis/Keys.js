@@ -112,7 +112,7 @@ class Keys extends Storage {
     const isDirExisted = await fs.existsSync(snapshortDir);
 
     if (!isDirExisted) {
-      await fs.mkdirSync(snapshortDir);
+      await fs.mkdirSync(snapshortDir, { recursive: true });
     }
 
     const fileName = `${Date.now()}`;
@@ -138,7 +138,7 @@ class Keys extends Storage {
     const isDirExisted = await fs.existsSync(snapshortDir);
 
     if (!isDirExisted) {
-      await fs.mkdirSync(snapshortDir);
+      await fs.mkdirSync(snapshortDir, { recursive: true });
     }
 
     const files = await fs.readdirSync(snapshortDir);
