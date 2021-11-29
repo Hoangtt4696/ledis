@@ -18,7 +18,6 @@ body {
 
 .log-result {
   font-size: 18px;
-  line-height: 1.5;
 }
 
 .cmd-input {
@@ -29,6 +28,7 @@ body {
   color: white;
   flex: 1;
   margin-left: 5px;
+  font-size: 18px;
 }
 
 pre {
