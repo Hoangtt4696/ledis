@@ -1,8 +1,8 @@
 import config from './config';
 import app from './server';
 
-const server = app.listen(config.port, () => {
-  console.log(`Server started at http://127.0.0.1:${config.port}`);
+const server = app.listen(process.env.PORT || config.port, () => {
+  console.log(`Server started at http://127.0.0.1:${process.env.PORT || config.port}`);
 });
 
 const unexpectedErrorHandler = () => {
