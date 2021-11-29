@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_PATH=./src nodemon -r esm src/index.js",
-    "debug": "nodemon --inspect -r esm -r module-alias/register src/index.js",
+    "start": "NODE_PATH=./src node -r esm src/index.js",
+    "debug": "node --inspect -r esm -r module-alias/register src/index.js",
     "prod": "NODE_ENV=production node -r esm -r module-alias/register src/index.js"
   },
   "dependencies": {
