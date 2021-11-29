@@ -40,7 +40,9 @@ class Keys extends Storage {
       throw new Error(util.getMessage(config.messages.WRONG_ARGUMENTS, 'flushdb'));
     }
 
-    this.storage = {};
+    Object.keys(this.storage).forEach(key => {
+      delete this.storage[key];
+    });
 
     return config.messages.OK;
   }
